@@ -9,21 +9,27 @@
  * @return {boolean} - True if the user input is valid, false otherwise
  */
 function checkIsValidUserInput(userInput) {
-  let isOk = true;
-
   if (userInput.length !== 4) {
-    isOk = false;
+    return false;
+  }
+
+  if (isNaN(userInput)) {
+    return false;
+  }
+
+  if (userInput.startsWith('0')) {
+    return false;
   }
 
   for (let i = 0; i < userInput.length; i++) {
-    for (let j = i; i < userInput.length; j++) {
+    for (let j = i + 1; j < userInput.length; j++) {
       if (userInput[i] === userInput[j]) {
-        isOk = false;
+        return false;
       }
     }
   }
 
-  return isOk;
+  return true;
 }
 
 module.exports = {
